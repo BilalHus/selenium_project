@@ -60,3 +60,7 @@ class BasePage:
     def go_to_login_page(self):
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
+
+    def go_to_bucket_page(self):
+        element = self.browser.find_element(*BasePageLocators.BUCKET_LINK)
+        element.click()

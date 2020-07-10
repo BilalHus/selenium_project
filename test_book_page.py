@@ -1,6 +1,7 @@
 import pytest
 
 from .pages.book_page import BookPage
+from .pages.bucket_page import BucketPage
 from .pages.login_page import LoginPage
 
 links = ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
@@ -65,3 +66,13 @@ def test_guest_can_go_to_login_page_from_product_page(browser, link):
     page.go_to_login_page()
     login_page = LoginPage(browser, browser.current_url)
     login_page.should_be_login_page()
+
+
+@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/the-city-and-the-stars_95/"])
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser, link):
+    page = BookPage(browser, link)
+    page.open()
+    page.go_to_bucket_page()
+    bucket_page = BucketPage(browser, browser.current_url)
+    bucket_page.bucket_is_empty()
+
